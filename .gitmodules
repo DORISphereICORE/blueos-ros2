@@ -1,3 +1,3 @@
 [submodule "ros2_ws/src/mavros_control"]
 	path = ros2_ws/src/mavros_control
-	url = https://github.com/itskalvik/mavros_control
+	url = https://github.com/DORISphereICORE/mavros_control
