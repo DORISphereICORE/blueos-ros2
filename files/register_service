@@ -1,6 +1,6 @@
 {
     "name": "ROS2",
-    "description": "Robot Operating System 2 (ROS2) extension for BlueOS",
+    "description": "Robot Operating System 2 (ROS2) extension for BlueOS utilizing spinnaker camera driver to obtain camera feed",
     "icon": "mdi-dots-grid",
     "company": "ItsKalvik",
     "version": "0.0.1",

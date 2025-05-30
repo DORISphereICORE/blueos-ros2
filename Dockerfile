@@ -7,6 +7,7 @@ RUN apt-get update \
     ros-${ROS_DISTRO}-mavros ros-${ROS_DISTRO}-mavros-extras ros-${ROS_DISTRO}-mavros-msgs \
     ros-${ROS_DISTRO}-geographic-msgs \
     ros-${ROS_DISTRO}-foxglove-bridge \
+    ros-${ROS_DISTRO}-spinnaker-camera-driver \
     python3-dev python3-pip \
     && apt-get autoremove -y \
     && apt-get clean -y \
@@ -17,7 +18,7 @@ COPY ros2_ws /home/ros2_ws
 RUN cd /home/ros2_ws/ \
     && python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt \
     && . "/opt/ros/${ROS_DISTRO}/setup.sh" \
-    && colcon build --symlink-install \
+    && colcon build \
     && ros2 run mavros install_geographiclib_datasets.sh \
     && echo "source /ros_entrypoint.sh" >> ~/.bashrc \
     && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc
@@ -37,7 +38,7 @@ COPY files/nginx.conf /etc/nginx/nginx.conf
 ADD files/start.sh /start.sh
 
 # Add docker configuration
-LABEL version="0.0.2"
+LABEL version="0.0.1"
 LABEL permissions='{\
   "NetworkMode": "host",\
   "HostConfig": {\
@@ -55,16 +56,16 @@ LABEL permissions='{\
 }'
 LABEL authors='[\
   {\
-    "name": "Kalvik Jakkala",\
-    "email": "itskalvik@gmail.com"\
+    "name": "Mikhalib Green",\
+    "email": "mikhalibgreen@gmail.com"\
   }\
 ]'
 LABEL company='{\
   "about": "",\
-  "name": "ItsKalvik",\
-  "email": "itskalvik@gmail.com"\
+  "name": "macgreen23",\
+  "email": "crazyclock02@gmail.com"\
 }'
-LABEL readme="https://raw.githubusercontent.com/itskalvik/blueos-ros2/master/README.md"
+LABEL readme="https://raw.githubusercontent.com/DORISphereICORE/blueos-ros2/master/README.md"
 LABEL type="other"
 LABEL tags='[\
   "ros2",\
