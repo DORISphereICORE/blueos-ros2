@@ -21,10 +21,12 @@ RUN cd /home/ros2_ws/ \
     && colcon build \
     && ros2 run mavros install_geographiclib_datasets.sh \
     && echo "source /ros_entrypoint.sh" >> ~/.bashrc \
-    && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc
+    && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc \
+    && echo "export SPINNAKER_GENTL64_CTI=/opt/ros/${ROS_DISTRO}/lib/spinnaker-gentl/Spinnaker_GenTL.cti" >> ~/.bashrc
 
 # Setup environment variables to configure mavros_control
 ENV NAVIGATION_TYPE=0 FOXGLOVE=True
+ENV SPINNAKER_GENTL64_CTI=/opt/ros/${ROS_DISTRO}/lib/spinnaker-gentl/Spinnaker_GenTL.cti
 
 # Setup ttyd for web terminal interface
 ADD files/install-ttyd.sh /install-ttyd.sh
@@ -36,6 +38,8 @@ COPY files/register_service /site/register_service
 COPY files/nginx.conf /etc/nginx/nginx.conf
 
 ADD files/start.sh /start.sh
+ADD files/start_mono_camera.sh /start_mono_camera.sh
+ADD files/start_color_camera.sh /start_color_camera.sh
 
 # Add docker configuration
 LABEL version="0.0.1"
