@@ -13,9 +13,9 @@ tmux split-window -h
 tmux select-pane -t 0
 tmux split-window -h
 
-tmux send-keys -t 0 "ros2 launch mavros_control base.launch.py" Enter
-tmux send-keys -t 1 "./start_mono_camera.sh" Enter
-tmux send-keys -t 2 "./start_color_camera.sh" Enter
+tmux send-keys -t 0 "ros2 launch mavros_control sphere.launch.py" Enter
+tmux send-keys -t 1 "bash set_framerate.sh" Enter
+tmux send-keys -t 2 
 tmux send-keys -t 3 
 
 function create_service {

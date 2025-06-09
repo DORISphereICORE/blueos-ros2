@@ -8,6 +8,9 @@ RUN apt-get update \
     ros-${ROS_DISTRO}-geographic-msgs \
     ros-${ROS_DISTRO}-foxglove-bridge \
     ros-${ROS_DISTRO}-spinnaker-camera-driver \
+    ros-${ROS_DISTRO}-web-video-server \
+    ros-${ROS_DISTRO}-image-publisher \
+    # ros-${ROS_DISTRO}-rtsp-image-transport \
     python3-dev python3-pip \
     && apt-get autoremove -y \
     && apt-get clean -y \
@@ -38,18 +41,27 @@ COPY files/register_service /site/register_service
 COPY files/nginx.conf /etc/nginx/nginx.conf
 
 ADD files/start.sh /start.sh
-ADD files/start_mono_camera.sh /start_mono_camera.sh
-ADD files/start_color_camera.sh /start_color_camera.sh
+ADD files/set_framerate.sh /set_framerate.sh
 
 # Add docker configuration
 LABEL version="0.0.1"
 LABEL permissions='{\
   "NetworkMode": "host",\
+  "ExposedPorts": {\
+    "554/rtsp": {}\
+    }.\
   "HostConfig": {\
     "Binds": [\
       "/dev:/dev:rw",\
       "/usr/blueos/extensions/ros2/:/home/persistent_ws/:rw"\
     ],\
+    "PortBindings": {\
+      "554/rtsp": [\
+        {\
+          "HostPort": ""\
+        }\
+      ]\
+    }\
     "Privileged": true,\
     "NetworkMode": "host"\
   },\
